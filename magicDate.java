@@ -24,7 +24,7 @@ public class magicDate{
       catch(Exception e){
         System.err.println(e);
         System.out.println("\nOne of your inputs was not valid.");
-        input.next();
+        input.next(); // why doesn't nextLine() work here?!?!?!??!?!?!?!?
       }
     }
     input.close();
