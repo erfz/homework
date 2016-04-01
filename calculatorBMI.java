@@ -32,3 +32,16 @@ public class calculatorBMI{
     input.close();
   }
 }
+
+/*
+ * Welcome to DrJava.  Working directory is F:\Current\Computer Science
+> run calculatorBMI
+Please enter your weight in pounds 
+ [DrJava Input Box]
+Please enter your height in inches 
+ [DrJava Input Box]
+Your weight is: 100.0
+Your height is: 50.0
+Your BMI is: 28.12 
+You are considered overweight. 
+> */
