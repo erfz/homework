@@ -1,34 +1,37 @@
 import java.util.Scanner;
-import java.util.StringTokenizer;
 import java.text.DecimalFormat;
 
 public class letterGrades{
   public static void main (String[] args){
-    int arrayParameter = 0;
     boolean loopingParameter = false;
     double[] gradeArray = null;
     DecimalFormat df = new DecimalFormat("#.00");
     Scanner input = new Scanner(System.in);
     while (!loopingParameter){
       try{
+        String[] inputParts = null;
         System.out.println("Please enter your grades (separated by spaces and/or commas).");
         String inputLine = input.nextLine();
-        StringTokenizer st = new StringTokenizer(inputLine, "%, *");
-        gradeArray = new double[st.countTokens()];
-        while (st.hasMoreTokens()){
-          gradeArray[arrayParameter] = Double.parseDouble(st.nextToken());
-          arrayParameter++;
+        if (inputLine.contains(",") || inputLine.contains(\\s+){
+          inputParts = inputLine.split("\\s*,*\\s*").trim();
         }
-        for (double value : gradeArray){
-          if (!(value >= 0 && value <= 100)){ // returns question mark if tokens were empty...already tried Double.isNaN() and Double.toString().trim().isEmpty()
-            throw new java.util.InputMismatchException();
+        else{
+          throw new IllegalArgumentException();
+        }
+        gradeArray = new double[inputParts.length];
+        for (int i = 0; i < inputParts.length; ++i){
+          if (inputParts[i] >= 0 && inputParts[i] <= 100){ // returns question mark if tokens were empty...already tried Double.isNaN() and Double.toString().trim().isEmpty()
+            gradeArray[i] = inputParts[i];
+          }
+          else{
+              throw new java.util.InputMismatchException();
           }
         }
         loopingParameter = true;
       }
       catch (Exception e){
         System.err.println(e);
-        System.out.println("You did not enter a valid set of grades. Each grade must be in valid decimal and between 0 and 100.\n");
+        System.out.println("You did not enter a valid set of grades. Each grade must be in valid numbers and between 0 and 100.\n");
         arrayParameter = 0;
       }
     }
