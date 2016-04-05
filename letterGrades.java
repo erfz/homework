@@ -12,16 +12,20 @@ public class letterGrades{
         String[] inputParts = null;
         System.out.println("Please enter your grades (separated by spaces and/or commas).");
         String inputLine = input.nextLine();
-        if (inputLine.contains(",") || inputLine.contains(\\s+){
-          inputParts = inputLine.split("\\s*,*\\s*").trim();
+        if ((inputLine.contains(",") || inputLine.contains(" ")) && !inputLine.matches("\\s+")){
+          inputParts = inputLine.split("\\s*,*\\s+\\\n?");
         }
         else{
+          System.out.println("String check failed!");
           throw new IllegalArgumentException();
+        }
+        for (String value : inputParts){
+          System.out.println(value);
         }
         gradeArray = new double[inputParts.length];
         for (int i = 0; i < inputParts.length; ++i){
-          if (inputParts[i] >= 0 && inputParts[i] <= 100){ // returns question mark if tokens were empty...already tried Double.isNaN() and Double.toString().trim().isEmpty()
-            gradeArray[i] = inputParts[i];
+          if (Double.parseDouble(inputParts[i]) >= 0 && Double.parseDouble(inputParts[i]) <= 100){ // returns question mark if tokens were empty...already tried Double.isNaN() and Double.toString().trim().isEmpty()
+            gradeArray[i] = Double.parseDouble(inputParts[i]);
           }
           else{
               throw new java.util.InputMismatchException();
@@ -32,7 +36,6 @@ public class letterGrades{
       catch (Exception e){
         System.err.println(e);
         System.out.println("You did not enter a valid set of grades. Each grade must be in valid numbers and between 0 and 100.\n");
-        arrayParameter = 0;
       }
     }
     for (int i = 0; i < gradeArray.length; ++i){
