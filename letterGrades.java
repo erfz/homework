@@ -13,7 +13,7 @@ public class letterGrades{
         System.out.println("Please enter your grades (separated by spaces and/or commas).");
         String inputLine = input.nextLine();
         if ((inputLine.contains(",") || inputLine.contains(" ")) && !inputLine.matches("\\s+")){
-          inputParts = inputLine.split("\\s*,*\\s+\\\n?");
+          inputParts = inputLine.split("\\s*(,*\\s+)|(,+)\\\n?");
         }
         else{
           System.out.println("String check failed!");
