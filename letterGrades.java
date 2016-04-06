@@ -12,11 +12,11 @@ public class letterGrades{
         String[] inputParts = null;
         System.out.println("Please enter your grades (separated by spaces and/or commas).");
         String inputLine = input.nextLine();
-        if ((inputLine.contains(",") || inputLine.contains(" ")) && !inputLine.matches("\\s+")){
-          inputParts = inputLine.split("\\s*(,*\\s+)|(,+)");
-        }
+        if ((inputLine.contains(",") || inputLine.contains(" ")) && !inputLine.matches("\\s+")){ // Hi Mr. Cohen -- I did this because for some reason
+          inputParts = inputLine.split("\\s*(,*\\s+)|(,+)");                                     // parseDouble for empty input gives a replacement character
+        } // the regex splits by optional spaces --> optional commas and 1 or more spaces OR 1 or more commas
         else{
-          System.out.println("String check failed!");
+          // System.out.println("String check failed!");
           throw new IllegalArgumentException();
         }
         for (String value : inputParts){
@@ -24,11 +24,11 @@ public class letterGrades{
         }
         gradeArray = new double[inputParts.length];
         for (int i = 0; i < inputParts.length; ++i){
-          if (Double.parseDouble(inputParts[i]) >= 0 && Double.parseDouble(inputParts[i]) <= 100){ // returns question mark if tokens were empty...already tried Double.isNaN() and Double.toString().trim().isEmpty()
+          if (Double.parseDouble(inputParts[i]) >= 0 && Double.parseDouble(inputParts[i]) <= 100){
             gradeArray[i] = Double.parseDouble(inputParts[i]);
           }
           else{
-              throw new java.util.InputMismatchException();
+              throw new java.util.InputMismatchException(); // this is arbitrary
           }
         }
         loopingParameter = true;
@@ -77,8 +77,11 @@ public class letterGrades{
     else if (value >= 60){
       gradeLetter = 'D';
     }
-    else{
+    else if (value >= 0){
       gradeLetter = 'F';
+    }
+    else{
+      gradeLetter = '!'; //denote bad input falling through -- should never happen.
     }
     return gradeLetter;
   }
