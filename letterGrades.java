@@ -22,7 +22,12 @@ public class letterGrades{
         for (String value : inputParts){
           System.out.println(value);
         }
-        gradeArray = new double[inputParts.length];
+        if (inputParts.length > 0){
+          gradeArray = new double[inputParts.length];
+        }
+        else{
+          throw new IllegalArgumentException();
+        }
         for (int i = 0; i < inputParts.length; ++i){
           if (Double.parseDouble(inputParts[i]) >= 0 && Double.parseDouble(inputParts[i]) <= 100){
             gradeArray[i] = Double.parseDouble(inputParts[i]);
@@ -38,6 +43,7 @@ public class letterGrades{
         System.out.println("You did not enter a valid set of grades. Each grade must be in valid numbers and between 0 and 100.\n");
       }
     }
+    input.close();
     for (int i = 0; i < gradeArray.length; ++i){
       String numericIndicator = "";
       if ((i+1) % 10 == 1){
@@ -86,3 +92,55 @@ public class letterGrades{
     return gradeLetter;
   }
 }
+
+/*
+ * Welcome to DrJava.  Working directory is C:\Users\Jguo.HS-C24-S-06\Downloads\homework-master\homework-master
+> run letterGrades
+Please enter your grades (separated by spaces and/or commas). 
+ [DrJava Input Box]
+java.lang.IllegalArgumentException 
+You did not enter a valid set of grades. Each grade must be in valid numbers and between 0 and 100.
+ 
+Please enter your grades (separated by spaces and/or commas). 
+ [DrJava Input Box]
+java.lang.IllegalArgumentException 
+You did not enter a valid set of grades. Each grade must be in valid numbers and between 0 and 100.
+ 
+Please enter your grades (separated by spaces and/or commas). 
+ [DrJava Input Box]
+java.lang.IllegalArgumentException 
+You did not enter a valid set of grades. Each grade must be in valid numbers and between 0 and 100.
+ 
+Please enter your grades (separated by spaces and/or commas). 
+ [DrJava Input Box]
+30 
+40 
+50 
+Your 1st grade was: 30.00% 
+Your 2nd grade was: 40.00% 
+Your 3rd grade was: 50.00% 
+Your grade average was: 40.00%
+Your letter grade was: F 
+> run letterGrades
+Please enter your grades (separated by spaces and/or commas). 
+ [DrJava Input Box]
+30 
+40 
+50 
+Your 1st grade was: 30.00% 
+Your 2nd grade was: 40.00% 
+Your 3rd grade was: 50.00% 
+Your grade average was: 40.00%
+Your letter grade was: F 
+> run letterGrades
+Please enter your grades (separated by spaces and/or commas). 
+ [DrJava Input Box]
+30 
+40 
+50 
+Your 1st grade was: 30.00% 
+Your 2nd grade was: 40.00% 
+Your 3rd grade was: 50.00% 
+Your grade average was: 40.00%
+Your letter grade was: F 
+> */
