@@ -46,7 +46,7 @@ public class celsiusFahrenheit{
       }
     }
     input.close();
-    while (celsiusHeaderString.length() < df.format((9.0/5.0 * endVal) + 32.0).length() + 2){ // not necessary given the length of the longest int32 and the one mandatory decimal place
+    while (celsiusHeaderString.length() < df.format((9.0/5.0 * endVal) + 32.0).length() + 2){
       celsiusHeaderString = celsiusHeaderString.concat(" ");
     }
     System.out.println("\n" + celsiusHeaderString + "Fahrenheit");
