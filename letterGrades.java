@@ -46,7 +46,7 @@ public class letterGrades{
     input.close();
     for (int i = 0; i < gradeArray.length; ++i){
       String numericIndicator = "";
-      if ((i+1) % 10 == 1){
+      if ((i+1) % 10 == 1){ // wrong -- bad for (i+1) % 100 = 11, 12 or 13. check AsteriskChart
         numericIndicator = "st";
       }
       else if ((i+1) % 10 == 2){
