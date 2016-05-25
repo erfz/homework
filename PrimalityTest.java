@@ -11,7 +11,7 @@ import java.math.BigInteger;
 public class PrimalityTest{
     public static void main (String[] args){
         long startTime = System.currentTimeMillis();
-        int mersenneExp = 86243;
+        int mersenneExp = 21701;
         System.out.print("2^" + mersenneExp + " - 1 is a prime: ");
         if (testPrimeDivisors(mersenneExp)){
             System.out.println(testPrimeLucasLehmer(mersenneExp));
@@ -24,7 +24,7 @@ public class PrimalityTest{
         BigInteger s = BigInteger.valueOf(4);
         BigInteger m = BigInteger.valueOf(2).pow(p).subtract(BigInteger.ONE);
         for (int i = 0; i < p - 2; ++i){
-            s = ((s.multiply(s)).subtract(BigInteger.valueOf(2))).mod(BigInteger.valueOf(2).pow(BigInteger.valueOf(p))).add(s.multiply(s).subtract(BigInteger.valueOf(2)).divide(BigInteger.valueOf(2).pow(BigInteger.valueOf(p)))).mod(m); 
+            s = (((s.multiply(s).subtract(BigInteger.valueOf(2))).mod(BigInteger.valueOf(2).pow(p))).add(s.multiply(s).subtract(BigInteger.valueOf(2)).divide(BigInteger.valueOf(2).pow(p)))).mod(m); 
         }
         if (s == BigInteger.ZERO) return true;
         else return false;
