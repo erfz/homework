@@ -11,9 +11,9 @@ import java.math.BigInteger;
 public class PrimalityTest{
     public static void main (String[] args){
         long startTime = System.currentTimeMillis();
-        int mersenneExp = 21701;
+        int mersenneExp = 110503;
         System.out.print("2^" + mersenneExp + " - 1 is a prime: ");
-        if (testPrimeDivisors(mersenneExp)){
+        if (mersenneExp % 2 != 0 && testPrimeDivisors(mersenneExp)){
             System.out.println(testPrimeLucasLehmer(mersenneExp));
         }
         else System.out.println("false");
@@ -30,7 +30,7 @@ public class PrimalityTest{
         else return false;
     }
     static boolean testPrimeDivisors(int val){
-        for (int i = 2; i < Math.floor(Math.sqrt(val)); ++i){
+        for (int i = 2; i <= Math.floor(Math.sqrt(val)); ++i){
             if (val % i == 0) return false;
         }
         return true;
@@ -38,4 +38,4 @@ public class PrimalityTest{
 }
 
 // time to check (initial algorithm)
-// p = 86243        ~ 12 minutes
+// p = 86243        ~ 12 minutes on desktop
