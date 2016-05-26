@@ -13,9 +13,10 @@ public class PrimalityTest{
         long startTime = System.currentTimeMillis();
         int mersenneExp = 110503;
         System.out.print("2^" + mersenneExp + " - 1 is a prime: ");
-        if (mersenneExp % 2 != 0 && testPrimeDivisors(mersenneExp)){
+        if (mersenneExp != 2 && mersenneExp % 2 != 0 && testPrimeDivisors(mersenneExp)){
             System.out.println(testPrimeLucasLehmer(mersenneExp));
         }
+        else if (mersenneExp == 2) System.out.println("true");
         else System.out.println("false");
         long endTime = System.currentTimeMillis();
         System.out.println("Computation time: " + (endTime - startTime) + " ms");
