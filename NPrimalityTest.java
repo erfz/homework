@@ -14,27 +14,39 @@ public class NPrimalityTest{
         String fileName = "MersennePrimeCheck.txt";
         int mersenneExp = 1;
         int finalMersenneIndex = 10000;
+        int primeCount = 0;
         long startTime = System.currentTimeMillis();
         try{
             FileWriter fileWriter = new FileWriter(fileName);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            bufferedWriter.write("Checking primality of Mersenne numbers of the form 2^p - 1: p = " + mersenneExp + " to " + finalMersenneIndex);
+            bufferedWriter.newLine();
+            bufferedWriter.newLine();
             while (mersenneExp <= finalMersenneIndex){
-                String writeDisplayString = "    ";                
+                String writeDisplayString = "    ";
                 for (int i = 0; i < Integer.toString(finalMersenneIndex).length() - Integer.toString(mersenneExp).length(); ++i) writeDisplayString = writeDisplayString.concat(" ");
-                bufferedWriter.write(mersenneExp + writeDisplayString);
-                if (mersenneExp != 2 && mersenneExp % 2 != 0 && testPrimeDivisors(mersenneExp)) bufferedWriter.write(Boolean.toString(testPrimeLucasLehmer(mersenneExp)));
-                else if (mersenneExp == 2) bufferedWriter.write("true");
-                else bufferedWriter.write("false");
-                bufferedWriter.newLine();
+                if (mersenneExp != 2 && testPrimeDivisors(mersenneExp) && testPrimeLucasLehmer(mersenneExp)){
+                    ++primeCount;
+                    bufferedWriter.write(mersenneExp + writeDisplayString + "true");
+                    bufferedWriter.newLine();
+                }
+                else if (mersenneExp == 2){
+                    bufferedWriter.write(mersenneExp + writeDisplayString + "true");
+                    bufferedWriter.newLine();
+                }
+//              else bufferedWriter.write("false");
                 ++mersenneExp;
             }
+            bufferedWriter.newLine();
+            long endTime = System.currentTimeMillis();
+            bufferedWriter.write("Number of primes found: " + primeCount);
+            bufferedWriter.newLine();
+            bufferedWriter.write("Computation time: " + (endTime - startTime) + " ms");            
             bufferedWriter.close();
         }
         catch(IOException ex){
             System.out.println("Error writing to file " + fileName);
         }
-        long endTime = System.currentTimeMillis();
-        System.out.println("Computation time: " + (endTime - startTime) + " ms");
     }
     static boolean testPrimeLucasLehmer(int p){
         BigInteger s = BigInteger.valueOf(4);
@@ -54,4 +66,4 @@ public class NPrimalityTest{
 }
 
 // time to check (initial algorithm)
-// p = 86243        ~ 12 minutes on desktop
+// ~21 minutes; first 10000
