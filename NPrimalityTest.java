@@ -31,6 +31,7 @@ public class NPrimalityTest{
                     bufferedWriter.newLine();
                 }
                 else if (mersenneExp == 2){
+                    ++primeCount;
                     bufferedWriter.write(mersenneExp + writeDisplayString + "true");
                     bufferedWriter.newLine();
                 }
