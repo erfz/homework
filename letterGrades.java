@@ -5,7 +5,7 @@ public class letterGrades{
   public static void main (String[] args){
     boolean loopingParameter = false;
     double[] gradeArray = null;
-    DecimalFormat df = new DecimalFormat("#.00");
+    DecimalFormat df = new DecimalFormat("#.0");
     Scanner input = new Scanner(System.in);
     while (!loopingParameter){
       try{
@@ -19,9 +19,9 @@ public class letterGrades{
           // System.out.println("String check failed!");
           throw new IllegalArgumentException();
         }
-        for (String value : inputParts){
-          System.out.println(value);
-        }
+        // for (String value : inputParts){
+        //   System.out.println(value);
+        // }
         if (inputParts.length > 0){
           gradeArray = new double[inputParts.length];
         }
@@ -45,102 +45,66 @@ public class letterGrades{
     }
     input.close();
     for (int i = 0; i < gradeArray.length; ++i){
-      String numericIndicator = "";
-      if ((i+1) % 10 == 1){ // wrong -- bad for (i+1) % 100 = 11, 12 or 13. check AsteriskChart
-        numericIndicator = "st";
-      }
-      else if ((i+1) % 10 == 2){
-        numericIndicator = "nd";
-      }
-      else if ((i+1) % 10 == 3){
-        numericIndicator = "rd";
-      }
-      else{
-        numericIndicator = "th";
-      }
-      System.out.println("Your " + (i+1) + numericIndicator + " grade was: " + df.format(gradeArray[i]) + "%");
+      System.out.println("Your " + (i+1) + getNumericIndicator(i) + " grade was: " + df.format(gradeArray[i]) + "% (" + determineGrade(gradeArray[i]) + ")");
     }
-    System.out.println("Your grade average was: " + df.format(arrayAverage(gradeArray)) + "%\nYour letter grade was: " + returnGradeLetter(arrayAverage(gradeArray)));
+    System.out.println("Your grade average was: " + df.format(calcAverage(gradeArray)) + "% (" + determineGrade(calcAverage(gradeArray)) + ")");
   }
-  public static double arrayAverage(double... vars){
+  public static double calcAverage(double... vars){ // accepts a set of arguments (including arrays) and computes the average of the values as a double
     double sum = 0;
     for (int i = 0; i < vars.length; ++i){
       sum += vars[i];
     }
     return sum/vars.length;
   }
-  public static char returnGradeLetter(double value){
-    char gradeLetter = '\0';
+  public static char determineGrade(double value){ // accepts a double and returns the corresponding grade letter as a char 
     if (value >= 90){
-      gradeLetter = 'A';
+      return 'A';
     }
     else if (value >= 80){
-      gradeLetter = 'B';
+      return 'B';
     }
     else if (value >= 70){
-      gradeLetter = 'C';
+      return 'C';
     }
     else if (value >= 60){
-      gradeLetter = 'D';
+      return 'D';
     }
     else if (value >= 0){
-      gradeLetter = 'F';
+      return 'F';
     }
     else{
-      gradeLetter = '!'; //denote bad input falling through -- should never happen.
+      return '!'; //denote bad input falling through -- should never happen.
     }
-    return gradeLetter;
+  }
+  public static String getNumericIndicator(int num){ // accepts an int and returns the corresponding suffix from the english language as a string
+    String numericIndicator = "";
+    if ((num+1) % 100 >= 11 && (num+1) % 100 <= 13){
+      numericIndicator = "th";
+    }
+    else if ((num+1) % 10 == 1){
+      numericIndicator = "st";
+    }
+    else if ((num+1) % 10 == 2){
+      numericIndicator = "nd";
+    }
+    else if ((num+1) % 10 == 3){
+      numericIndicator = "rd";
+    }
+    else{
+      numericIndicator = "th";
+    }
+    return numericIndicator;
   }
 }
 
 /*
- * Welcome to DrJava.  Working directory is C:\Users\Jguo.HS-C24-S-06\Downloads\homework-master\homework-master
-> run letterGrades
-Please enter your grades (separated by spaces and/or commas). 
- [DrJava Input Box]
-java.lang.IllegalArgumentException 
-You did not enter a valid set of grades. Each grade must be in valid numbers and between 0 and 100.
- 
-Please enter your grades (separated by spaces and/or commas). 
- [DrJava Input Box]
-java.lang.IllegalArgumentException 
-You did not enter a valid set of grades. Each grade must be in valid numbers and between 0 and 100.
- 
-Please enter your grades (separated by spaces and/or commas). 
- [DrJava Input Box]
-java.lang.IllegalArgumentException 
-You did not enter a valid set of grades. Each grade must be in valid numbers and between 0 and 100.
- 
-Please enter your grades (separated by spaces and/or commas). 
- [DrJava Input Box]
-30 
-40 
-50 
-Your 1st grade was: 30.00% 
-Your 2nd grade was: 40.00% 
-Your 3rd grade was: 50.00% 
-Your grade average was: 40.00%
-Your letter grade was: F 
-> run letterGrades
-Please enter your grades (separated by spaces and/or commas). 
- [DrJava Input Box]
-30 
-40 
-50 
-Your 1st grade was: 30.00% 
-Your 2nd grade was: 40.00% 
-Your 3rd grade was: 50.00% 
-Your grade average was: 40.00%
-Your letter grade was: F 
-> run letterGrades
-Please enter your grades (separated by spaces and/or commas). 
- [DrJava Input Box]
-30 
-40 
-50 
-Your 1st grade was: 30.00% 
-Your 2nd grade was: 40.00% 
-Your 3rd grade was: 50.00% 
-Your grade average was: 40.00%
-Your letter grade was: F 
-> */
+  C:\Users\mguo1\Downloads>java letterGrades
+  Please enter your grades (separated by spaces and/or commas).
+  10 20 30 40 50
+  Your 1st grade was: 10.0% (F)
+  Your 2nd grade was: 20.0% (F)
+  Your 3rd grade was: 30.0% (F)
+  Your 4th grade was: 40.0% (F)
+  Your 5th grade was: 50.0% (F)
+  Your grade average was: 30.0% (F)
+*/
